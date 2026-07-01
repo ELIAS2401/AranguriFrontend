@@ -5,11 +5,20 @@ on:
     branches: [main]
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
@@ -23,11 +32,17 @@ jobs:
       - name: Build Angular
         run: npm run build -- --configuration production --base-href /AranguriFrontend/
 
-      - name: Deploy to gh-pages
-        run: |
-          npx angular-cli-ghpages \
-            --dir=dist/browser \
-            --repo=https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git \
-            --name=github-actions \
-            --email=actions@github.com \
-            --message="Automated deploy $(date +'%Y-%m-%d %H:%M')"
+      - name: Create 404.html for SPA routing
+        run: cp dist/browser/index.html dist/browser/404.html
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/browser
+
+      - name: Deploy to Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
