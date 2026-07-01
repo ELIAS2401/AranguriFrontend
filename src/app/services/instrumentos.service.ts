@@ -44,9 +44,8 @@ export class InstrumentosService {
   }
 
   crear(data: Omit<IInstrumento, "id" | "created_at">): Observable<IInstrumento> {
-    const { estado: _estado, creador: _creador, contacto: _contacto, ...payload } = data;
     return this.http
-      .post<BackendInstrumento>(this.apiUrl, payload)
+      .post<BackendInstrumento>(this.apiUrl, data)
       .pipe(map(toFrontend));
   }
 
@@ -54,9 +53,8 @@ export class InstrumentosService {
     id: string,
     data: Partial<Omit<IInstrumento, "id" | "created_at">>
   ): Observable<IInstrumento> {
-    const { estado: _estado, creador: _creador, contacto: _contacto, ...payload } = data as any;
     return this.http
-      .patch<BackendInstrumento>(`${this.apiUrl}/${id}`, payload)
+      .patch<BackendInstrumento>(`${this.apiUrl}/${id}`, data)
       .pipe(map(toFrontend));
   }
 

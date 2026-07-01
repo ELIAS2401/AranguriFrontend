@@ -44,7 +44,7 @@ export class DetalleComponent implements OnInit {
     const inst = this.instrumento();
     if (!inst || !confirm(`¿Eliminar ${inst.nombre}?`)) return;
     this.service.eliminar(inst.id).subscribe({
-      next: () => this.router.navigate(["/"]),
+      next: () => this.router.navigate(["/instrumentos"]),
       error: () => this.error.set("Error al eliminar"),
     });
   }
@@ -54,7 +54,7 @@ export class DetalleComponent implements OnInit {
   }
 
   volverAlListado(): void {
-    this.router.navigate(["/"]);
+    this.router.navigate(["/instrumentos"]);
   }
 
   onImgError(event: Event) {

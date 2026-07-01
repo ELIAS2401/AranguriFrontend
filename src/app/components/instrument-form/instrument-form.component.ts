@@ -85,7 +85,7 @@ export class InstrumentFormComponent implements OnInit {
       : this.service.crear(data);
 
     request.subscribe({
-      next: () => this.router.navigate(["/"]),
+      next: () => this.router.navigate(["/instrumentos"]),
       error: (err) => {
         const msg = err?.error?.error || "Error al guardar";
         this.error.set(msg);
@@ -95,6 +95,6 @@ export class InstrumentFormComponent implements OnInit {
   }
 
   cancelar(): void {
-    this.router.navigate(["/"]);
+    this.router.navigate(["/instrumentos"]);
   }
 }
