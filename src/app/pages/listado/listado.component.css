@@ -1,0 +1,94 @@
+.listado-header {
+  margin-bottom: 32px;
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.listado-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.subtitle {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 15px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.state-msg {
+  text-align: center;
+  padding: 80px 24px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.state-msg h2 {
+  font-size: 24px;
+  color: #fff;
+  margin: 16px 0 8px;
+}
+
+.empty-icon {
+  font-size: 48px;
+  margin: 0;
+}
+
+.empty-sub {
+  margin-bottom: 24px;
+}
+
+.error-text {
+  color: #ef4444;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.btn-retry {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 10px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.btn-retry:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.btn-primary {
+  display: inline-block;
+  background: #00e676;
+  color: #0a0a0c;
+  padding: 10px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-primary:hover {
+  background: #00c96a;
+  box-shadow: 0 0 20px rgba(0, 230, 118, 0.3);
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .listado-header {
+    flex-direction: column;
+    gap: 4px;
+  }
+}

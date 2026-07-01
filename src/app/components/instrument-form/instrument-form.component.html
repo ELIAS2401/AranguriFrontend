@@ -1,0 +1,121 @@
+<div class="form-page">
+  <button class="btn-back" (click)="cancelar()">← Volver</button>
+
+  <div class="form-panel">
+    <h1 class="form-title">{{ isEditing() ? "Editar instrumento" : "Publicar instrumento" }}</h1>
+
+    @if (error()) {
+      <div class="form-error">{{ error() }}</div>
+    }
+
+    <form #formEl="ngForm" (ngSubmit)="guardar()" class="form">
+      <div class="form-grid">
+        <div class="field">
+          <label class="label" for="nombre">Nombre</label>
+          <input
+            id="nombre"
+            name="nombre"
+            [(ngModel)]="form.nombre"
+            class="input"
+            placeholder="Ej: Gibson Les Paul"
+            required
+          />
+        </div>
+
+        <div class="field">
+          <label class="label" for="marca">Marca</label>
+          <input
+            id="marca"
+            name="marca"
+            [(ngModel)]="form.marca"
+            class="input"
+            placeholder="Ej: Fender"
+            required
+          />
+        </div>
+
+        <div class="field">
+          <label class="label" for="categoria">Categoría</label>
+          <select
+            id="categoria"
+            name="categoria"
+            [(ngModel)]="form.categoria"
+            class="input"
+            required
+          >
+            <option value="" disabled>Seleccioná una categoría</option>
+            @for (cat of categorias; track cat) {
+              <option [value]="cat">{{ cat }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="label" for="precio">Precio ($)</label>
+          <input
+            id="precio"
+            name="precio"
+            type="number"
+            [(ngModel)]="form.precio"
+            class="input"
+            placeholder="Ej: 15000"
+            min="0"
+            required
+          />
+        </div>
+
+        <div class="field">
+          <label class="label" for="estado">Estado</label>
+          <select
+            id="estado"
+            name="estado"
+            [(ngModel)]="form.estado"
+            class="input"
+          >
+            <option value="usado">Usado</option>
+            <option value="nuevo">Nuevo</option>
+          </select>
+        </div>
+
+        <div class="field field-full">
+          <label class="label" for="imagen">Imagen (URL)</label>
+          <input
+            id="imagen"
+            name="imagen"
+            [(ngModel)]="form.imagen"
+            class="input"
+            placeholder="https://ejemplo.com/imagen.jpg"
+            required
+          />
+        </div>
+
+        <div class="field field-full">
+          <label class="label" for="descripcion">Descripción</label>
+          <textarea
+            id="descripcion"
+            name="descripcion"
+            [(ngModel)]="form.descripcion"
+            class="input textarea"
+            placeholder="Describí el estado, año, accesorios incluidos..."
+            required
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button
+          type="submit"
+          class="btn-submit"
+          [disabled]="submitting()"
+        >
+          @if (submitting()) {
+            Guardando...
+          } @else {
+            {{ isEditing() ? "Guardar cambios" : "Publicar instrumento" }}
+          }
+        </button>
+        <button type="button" class="btn-cancel" (click)="cancelar()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>

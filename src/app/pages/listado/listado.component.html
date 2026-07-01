@@ -1,0 +1,37 @@
+<div class="listado">
+  <div class="listado-header">
+    <h1>Instrumentos</h1>
+    <p class="subtitle">{{ instrumentos().length }} publicados</p>
+  </div>
+
+  @if (loading()) {
+    <div class="grid">
+      @for (_ of skeletonArray; track $index) {
+        <app-skeleton-card />
+      }
+    </div>
+  } @else if (error()) {
+    <div class="state-msg">
+      <p class="error-text">{{ error() }}</p>
+      <button class="btn-retry" (click)="cargar()">Reintentar</button>
+    </div>
+  } @else if (instrumentos().length === 0) {
+    <div class="state-msg">
+      <p class="empty-icon">🎸</p>
+      <h2>No hay instrumentos aún</h2>
+      <p class="empty-sub">Sé el primero en publicar uno</p>
+      <a routerLink="/nuevo" class="btn-primary">+ Publicar instrumento</a>
+    </div>
+  } @else {
+    <div class="grid">
+      @for (inst of instrumentos(); track inst.id) {
+        <app-instrument-card
+          [instrumento]="inst"
+          (verDetalle)="verDetalle($event)"
+          (editar)="editar($event)"
+          (eliminar)="eliminar($event)"
+        />
+      }
+    </div>
+  }
+</div>

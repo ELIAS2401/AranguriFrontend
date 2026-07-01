@@ -1,0 +1,60 @@
+@if (loading()) {
+  <div class="detalle-loading">
+    <div class="skeleton-hero skeleton-pulse"></div>
+    <div class="skeleton-info">
+      <div class="skeleton-line w-40 skeleton-pulse"></div>
+      <div class="skeleton-line w-25 skeleton-pulse"></div>
+      <div class="skeleton-line w-60 skeleton-pulse"></div>
+      <div class="skeleton-line w-20 skeleton-pulse" style="height: 32px; margin-top: 8px;"></div>
+    </div>
+  </div>
+} @else if (error()) {
+  <div class="state-msg">
+    <p class="error-text">{{ error() }}</p>
+    <button class="btn-outline" (click)="volverAlListado()">Volver al listado</button>
+  </div>
+} @else if (instrumento(); as inst) {
+  <button class="btn-back" (click)="volver()">← Volver</button>
+
+  <div class="detalle">
+    <div class="detalle-img-wrap">
+      <img
+        [src]="inst.imagen"
+        [alt]="inst.nombre"
+        class="detalle-img"
+        (error)="onImgError($event)"
+      />
+    </div>
+
+    <div class="detalle-info">
+      <div class="detalle-header">
+        <div>
+          <h1 class="detalle-nombre">{{ inst.nombre }}</h1>
+          <p class="detalle-marca">{{ inst.marca }}</p>
+        </div>
+        <p class="detalle-precio">${{ inst.precio | number }}</p>
+      </div>
+
+      <div class="detalle-tags">
+        <span class="tag tag-cat">{{ inst.categoria }}</span>
+        <span
+          class="tag"
+          [class.tag-nuevo]="inst.estado === 'nuevo'"
+          [class.tag-usado]="inst.estado !== 'nuevo'"
+        >
+          {{ inst.estado || "usado" }}
+        </span>
+      </div>
+
+      <div class="detalle-desc">
+        <h3>Descripción</h3>
+        <p>{{ inst.descripcion }}</p>
+      </div>
+
+      <div class="detalle-actions">
+        <a [routerLink]="['/editar', inst.id]" class="btn-primary">Editar</a>
+        <button class="btn-danger" (click)="eliminar()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+}

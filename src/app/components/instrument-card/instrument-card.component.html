@@ -1,0 +1,29 @@
+<div class="card" (click)="verDetalle.emit(instrumento().id)">
+  <div class="card-img-wrap">
+    <img
+      [src]="instrumento().imagen"
+      [alt]="instrumento().nombre"
+      class="card-img"
+      loading="lazy"
+      (error)="onImgError($event)"
+    />
+    <span class="card-badge-cat" [style.background]="getCategoriaColor()">
+      {{ instrumento().categoria }}
+    </span>
+    <span class="card-badge-estado" [class.usado]="instrumento().estado === 'usado'" [class.nuevo]="instrumento().estado === 'nuevo'">
+      {{ instrumento().estado || "usado" }}
+    </span>
+  </div>
+  <div class="card-body">
+    <h3 class="card-title">{{ instrumento().nombre }}</h3>
+    <p class="card-marca">{{ instrumento().marca }}</p>
+    <p class="card-precio">${{ instrumento().precio | number }}</p>
+    <div class="card-actions">
+      <a [routerLink]="['/instrumento', instrumento().id]" class="btn-outline">Ver detalle</a>
+      <div class="card-actions-right">
+        <button (click)="$event.stopPropagation(); editar.emit(instrumento().id)" class="btn-icon" title="Editar">✎</button>
+        <button (click)="$event.stopPropagation(); eliminar.emit(instrumento().id)" class="btn-icon btn-icon-danger" title="Eliminar">✕</button>
+      </div>
+    </div>
+  </div>
+</div>
