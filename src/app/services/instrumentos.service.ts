@@ -12,11 +12,18 @@ interface BackendInstrumento {
   descripcion: string;
   imagen: string;
   estado?: string;
+  creador?: string;
+  contacto?: string;
   created_at: string;
 }
 
 function toFrontend(data: BackendInstrumento): IInstrumento {
-  return { ...data, estado: data.estado || "usado" };
+  return {
+    ...data,
+    estado: data.estado || "usado",
+    creador: data.creador || "",
+    contacto: data.contacto || "",
+  };
 }
 
 @Injectable({ providedIn: "root" })
@@ -37,7 +44,7 @@ export class InstrumentosService {
   }
 
   crear(data: Omit<IInstrumento, "id" | "created_at">): Observable<IInstrumento> {
-    const { estado: _estado, ...payload } = data;
+    const { estado: _estado, creador: _creador, contacto: _contacto, ...payload } = data;
     return this.http
       .post<BackendInstrumento>(this.apiUrl, payload)
       .pipe(map(toFrontend));
@@ -47,7 +54,7 @@ export class InstrumentosService {
     id: string,
     data: Partial<Omit<IInstrumento, "id" | "created_at">>
   ): Observable<IInstrumento> {
-    const { estado: _estado, ...payload } = data as any;
+    const { estado: _estado, creador: _creador, contacto: _contacto, ...payload } = data as any;
     return this.http
       .patch<BackendInstrumento>(`${this.apiUrl}/${id}`, payload)
       .pipe(map(toFrontend));

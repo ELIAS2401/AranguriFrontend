@@ -77,6 +77,30 @@
           </select>
         </div>
 
+        <div class="field">
+          <label class="label" for="creador">Tu nombre</label>
+          <input
+            id="creador"
+            name="creador"
+            [(ngModel)]="form.creador"
+            class="input"
+            placeholder="Ej: Juan Pérez"
+            required
+          />
+        </div>
+
+        <div class="field">
+          <label class="label" for="contacto">WhatsApp</label>
+          <input
+            id="contacto"
+            name="contacto"
+            [(ngModel)]="form.contacto"
+            class="input"
+            placeholder="Ej: 5491123456789"
+            required
+          />
+        </div>
+
         <div class="field field-full">
           <label class="label" for="imagen">Imagen (URL)</label>
           <input

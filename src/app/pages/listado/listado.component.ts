@@ -1,5 +1,5 @@
 import { Component, OnInit, inject, signal } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { InstrumentosService } from "../../services/instrumentos.service";
 import { InstrumentCardComponent } from "../../components/instrument-card/instrument-card.component";
 import { SkeletonCardComponent } from "../../components/skeleton-card/skeleton-card.component";
@@ -8,7 +8,7 @@ import type { IInstrumento } from "../../models/instrumento";
 @Component({
   selector: "app-listado",
   standalone: true,
-  imports: [InstrumentCardComponent, SkeletonCardComponent],
+  imports: [InstrumentCardComponent, SkeletonCardComponent, RouterLink],
   templateUrl: "./listado.component.html",
   styleUrls: ["./listado.component.css"],
 })

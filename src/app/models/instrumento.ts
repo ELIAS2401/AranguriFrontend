@@ -7,6 +7,8 @@ export interface IInstrumento {
   descripcion: string;
   imagen: string;
   estado: string;
+  creador: string;
+  contacto: string;
   created_at: string;
 }
 

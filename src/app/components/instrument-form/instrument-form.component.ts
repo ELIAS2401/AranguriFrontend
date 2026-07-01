@@ -33,6 +33,8 @@ export class InstrumentFormComponent implements OnInit {
     estado: "usado",
     descripcion: "",
     imagen: "",
+    creador: "",
+    contacto: "",
   };
 
   ngOnInit(): void {
@@ -49,6 +51,8 @@ export class InstrumentFormComponent implements OnInit {
           this.form.estado = data.estado || "usado";
           this.form.descripcion = data.descripcion;
           this.form.imagen = data.imagen;
+          this.form.creador = data.creador;
+          this.form.contacto = data.contacto;
         },
         error: () => this.error.set("Error al cargar instrumento"),
       });
@@ -56,7 +60,7 @@ export class InstrumentFormComponent implements OnInit {
   }
 
   guardar(): void {
-    if (!this.form.nombre || !this.form.marca || !this.form.categoria || !this.form.precio || !this.form.descripcion || !this.form.imagen) {
+    if (!this.form.nombre || !this.form.marca || !this.form.categoria || !this.form.precio || !this.form.descripcion || !this.form.imagen || !this.form.creador || !this.form.contacto) {
       this.error.set("Todos los campos son obligatorios");
       return;
     }
@@ -72,6 +76,8 @@ export class InstrumentFormComponent implements OnInit {
       estado: this.form.estado,
       descripcion: this.form.descripcion,
       imagen: this.form.imagen,
+      creador: this.form.creador,
+      contacto: this.form.contacto,
     };
 
     const request = this.isEditing()

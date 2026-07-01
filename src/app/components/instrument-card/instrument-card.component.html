@@ -17,6 +17,7 @@
   <div class="card-body">
     <h3 class="card-title">{{ instrumento().nombre }}</h3>
     <p class="card-marca">{{ instrumento().marca }}</p>
+    <p class="card-creador">👤 {{ instrumento().creador || "Anónimo" }}</p>
     <p class="card-precio">${{ instrumento().precio | number }}</p>
     <div class="card-actions">
       <a [routerLink]="['/instrumento', instrumento().id]" class="btn-outline">Ver detalle</a>

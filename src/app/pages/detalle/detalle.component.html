@@ -51,6 +51,22 @@
         <p>{{ inst.descripcion }}</p>
       </div>
 
+      <div class="detalle-vendedor">
+        <h3>Vendedor</h3>
+        <p class="vendedor-nombre">{{ inst.creador || "Anónimo" }}</p>
+        @if (inst.contacto) {
+          <a
+            class="btn-wpp"
+            [href]="'https://wa.me/' + inst.contacto.replace(/[^0-9]/g, '')"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="wpp-icon">📱</span>
+            {{ inst.contacto }}
+          </a>
+        }
+      </div>
+
       <div class="detalle-actions">
         <a [routerLink]="['/editar', inst.id]" class="btn-primary">Editar</a>
         <button class="btn-danger" (click)="eliminar()">Eliminar</button>
