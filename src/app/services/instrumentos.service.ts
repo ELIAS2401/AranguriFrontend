@@ -1,6 +1,7 @@
 import { Injectable, inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, map } from "rxjs";
+import { environment } from "../../environments/environment";
 import type { IInstrumento } from "../models/instrumento";
 
 interface BackendInstrumento {
@@ -29,7 +30,7 @@ function toFrontend(data: BackendInstrumento): IInstrumento {
 @Injectable({ providedIn: "root" })
 export class InstrumentosService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = "/api/instrumentos";
+  private readonly apiUrl = `${environment.apiUrl}/api/instrumentos`;
 
   listar(): Observable<IInstrumento[]> {
     return this.http

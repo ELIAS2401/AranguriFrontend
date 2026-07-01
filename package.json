@@ -8,7 +8,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "deploy:ghpages": "ng build --configuration production --base-href /AranguriFrontend/ && npx angular-cli-ghpages --dir=dist/browser --name=Elias --email=elias@example.com"
   },
   "dependencies": {
     "@angular/common": "^21.2.17",
@@ -25,6 +26,7 @@
     "@angular/cli": "^21.2.17",
     "@angular/compiler": "^21.2.17",
     "@angular/compiler-cli": "^21.2.17",
+    "angular-cli-ghpages": "^3.1.0",
     "typescript": "~5.9.3"
   }
 }
